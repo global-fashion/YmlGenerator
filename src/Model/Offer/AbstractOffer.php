@@ -177,6 +177,11 @@ abstract class AbstractOffer implements OfferInterface
     private $condition;
 
     /**
+     * @var integer
+     */
+    private $quantity;
+
+    /**
      * @return array
      */
     public function toArray()
@@ -893,6 +898,26 @@ abstract class AbstractOffer implements OfferInterface
     }
 
     /**
+     * @return integer
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param integer $quantity
+     *
+     * @return $this
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     abstract protected function getOptions();
@@ -922,6 +947,7 @@ abstract class AbstractOffer implements OfferInterface
                 'dimensions' => $this->getDimensions(),
                 'name' => $this->getName(),
                 'enable_auto_discounts' => $this->getAutoDiscount(),
+                'quantity' => $this->getQuantity(),
             ] + $this->getCustomElements();
     }
 
