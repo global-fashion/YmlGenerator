@@ -180,6 +180,11 @@ abstract class AbstractOffer implements OfferInterface
      * @var integer
      */
     private $quantity;
+    
+    /**
+     * @var array
+     */
+    private $outlets;
 
     /**
      * @var integer
@@ -921,6 +926,26 @@ abstract class AbstractOffer implements OfferInterface
 
         return $this;
     }
+    
+    /**
+     * @return integer
+     */
+    public function getOutlets()
+    {
+        return $this->outlets;
+    }
+
+    /**
+     * @param array $outlets
+     *
+     * @return $this
+     */
+    public function setOutlets($outlets)
+    {
+        $this->outlets = $outlets;
+
+        return $this;
+    }
 
     /**
      * @return integer
@@ -973,6 +998,7 @@ abstract class AbstractOffer implements OfferInterface
                 'name' => $this->getName(),
                 'enable_auto_discounts' => $this->getAutoDiscount(),
                 'quantity' => $this->getQuantity(),
+                'outlets' => $this->getOutlets(),
                 'count' => $this->getCount(),
             ] + $this->getCustomElements();
     }
