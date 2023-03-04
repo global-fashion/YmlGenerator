@@ -19,6 +19,7 @@ use Bukashk0zzz\YmlGenerator\Model\Offer\OfferGroupAwareInterface;
 use Bukashk0zzz\YmlGenerator\Model\Offer\OfferInterface;
 use Bukashk0zzz\YmlGenerator\Model\Offer\OfferParam;
 use Bukashk0zzz\YmlGenerator\Model\ShopInfo;
+use Illuminate\Support\Str;
 
 /**
  * Class Generator
@@ -369,7 +370,17 @@ class Generator
         if (\is_bool($value)) {
             $value = $value ? 'true' : 'false';
         }
-        $this->writer->writeElement($name, $value);
+        if (is_array($value)) {
+            $content = '<'.$name.'>';
+            $singular = Str::singular($name);
+            foreach ($value AS $key => $value) {
+                $content .= '<'.$singular.' id="'.$key.'" instock="'.$value.'" />';
+            }
+            $content .= '</'.$name.'>';
+            $this->writer->writeRaw($content);
+        } else {
+            $this->writer->writeElement($name, $value);
+        }
 
         return true;
     }
