@@ -928,7 +928,7 @@ abstract class AbstractOffer implements OfferInterface
     }
     
     /**
-     * @return integer
+     * @return array
      */
     public function getOutlets()
     {
